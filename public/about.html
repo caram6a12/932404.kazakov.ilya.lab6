@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О себе | Каталог книг</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+  <header>
+    <h1>📚 Каталог книг</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/about" class="active">О себе</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="about">
+      <h2>О проекте</h2>
+
+      <h3>Лабораторная работа №6 — Каталог книг (PWA)</h3>
+      <p><strong>Студент:</strong> Казаков Илья</p>
+      <p><strong>Тема:</strong> «Каталог книг» (поиск и фильтрация)</p>
+      <p><strong>Вариант:</strong> 9</p>
+      <p><strong>Репозиторий:</strong> <a href="https://github.com/caram6a12/932404.kazakov.ilya.lab6" target="_blank">https://github.com/caram6a12/932404.kazakov.ilya.lab6</a></p>
+
+      <h3>Описание</h3>
+      <p>Веб-приложение на Node.js с Express. Сервер отдаёт статические страницы и JSON API со списком книг. Книги можно фильтровать по автору и году издания через query-параметры. Реализованы PWA-технологии: манифест, иконки и service worker для кэширования и работы без интернета.</p>
+
+      <h3>Технологии</h3>
+      <p>Node.js, Express, HTML/CSS/JS, PWA (manifest.json, service-worker.js)</p>
+
+      <h3>Запуск</h3>
+      <pre><code>npm init -y
+npm install express
+node server.js</code></pre>
+      <p>Сервер доступен по адресу <code>http://localhost:3000</code>.</p>
+
+      <h3>Маршруты</h3>
+      <ul>
+        <li><code>GET /</code> — главная страница каталога с формой фильтрации</li>
+        <li><code>GET /about</code> — информация о проекте</li>
+        <li><code>GET /api/books</code> — JSON-список всех книг</li>
+        <li><code>GET /api/books?author=Толстой</code> — фильтр по автору</li>
+        <li><code>GET /api/books?year=1869</code> — фильтр по году издания</li>
+      </ul>
+      <p>Без параметров возвращаются все книги. Если по фильтру ничего не найдено — пустой массив <code>[]</code>.</p>
+
+      <h3>Как работает</h3>
+      <p>При открытии главной страница загружает книги через <code>/api/books</code> и отрисовывает их. При вводе автора или года JavaScript отправляет запрос с параметрами, сервер фильтрует массив книг и возвращает JSON. Service Worker кэширует HTML, CSS и JS, поэтому после первого посещения сайт открывается без интернета.</p>
+
+      <h3>PWA и офлайн</h3>
+      <p><code>manifest.json</code> описывает приложение и иконки. <code>service-worker.js</code> кэширует статические файлы при первом посещении, после чего страницы открываются без сети.</p>
+
+      <a href="/" class="btn">Вернуться на главную</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Лабораторная работа №6 — Каталог книг (PWA)</p>
+    <p><a href="https://github.com/caram6a12/932404.kazakov.ilya.lab6" target="_blank">Репозиторий на GitHub</a></p>
+  </footer>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/js/service-worker.js')
+        .then(reg => console.log('SW зарегистрирован:', reg.scope))
+        .catch(err => console.error('Ошибка регистрации SW:', err));
+    }
+  </script>
+</body>
+</html>

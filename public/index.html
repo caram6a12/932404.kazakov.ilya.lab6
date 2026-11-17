@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог книг | Главная</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#2c3e50">
+  <meta name="description" content="Каталог книг — поиск и фильтрация произведений">
+</head>
+<body>
+  <header>
+    <h1>📚 Каталог книг</h1>
+    <nav>
+      <a href="/" class="active">Главная</a>
+      <a href="/about">О себе</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="filters">
+      <h2>Поиск и фильтрация</h2>
+      <form id="bookForm" method="GET" action="/api/books">
+        <label for="author">Автор:</label>
+        <input type="text" id="author" name="author" placeholder="например, Толстой">
+
+        <label for="year">Год издания:</label>
+        <input type="number" id="year" name="year" placeholder="например, 1869">
+
+        <button type="submit">Найти</button>
+        <button type="button" id="resetBtn">Сбросить</button>
+      </form>
+    </section>
+
+    <section class="books-list" id="booksList">
+      <h2>Все книги</h2>
+      <div id="booksContainer" class="books-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Лабораторная работа №6 — Каталог книг (PWA)</p>
+    <p><a href="https://github.com/caram6a12/932404.kazakov.ilya.lab6" target="_blank">Репозиторий на GitHub</a></p>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/js/service-worker.js')
+        .then(reg => console.log('SW зарегистрирован:', reg.scope))
+        .catch(err => console.error('Ошибка регистрации SW:', err));
+    }
+  </script>
+</body>
+</html>
